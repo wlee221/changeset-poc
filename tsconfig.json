@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@wlee221-poc/core": ["packages/core/src"],
+      "@wlee221-poc/bar": ["packages/bar/src"],
+      "@wlee221-poc/foo": ["packages/foo/src"]
+    }
+  }
+}
