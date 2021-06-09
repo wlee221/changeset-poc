@@ -18,5 +18,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "homepage": "https://github.com/wlee221/changeset-poc#readme"
+  "homepage": "https://github.com/wlee221/changeset-poc#readme",
+  "dependencies": {
+    "@changesets/changelog-github": "^0.4.0",
+    "@changesets/cli": "^2.16.0"
+  }
 }
