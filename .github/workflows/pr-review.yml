@@ -21,3 +21,5 @@ jobs:
           [ -f .changeset/pre.json ] && yarn changeset pre exit
       - name: Run changeset version
         run: yarn changeset version
+      - name: Find pr-#
+        run: echo "${{ github.event.number }}"
