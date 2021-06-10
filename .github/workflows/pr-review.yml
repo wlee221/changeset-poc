@@ -21,5 +21,8 @@ jobs:
           [ -f .changeset/pre.json ] && yarn changeset pre exit
       - name: Run changeset version
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
-      - name: Print package version changes
+      - name: Log package version changes
         run: cat ${{ github.workspace }}/packages/core/package.json
+      - name: Publish to pr-# tag
+        run: yarn changeset publish --tag pr-${{ github.event.number }}
+        
