@@ -25,7 +25,11 @@ jobs:
         run: cat ${{ github.workspace }}/packages/core/package.json
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            email=wkl.hyo@gmail.com
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        
