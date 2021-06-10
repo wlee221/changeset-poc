@@ -22,5 +22,13 @@
   "dependencies": {
     "@changesets/changelog-github": "^0.4.0",
     "@changesets/cli": "^2.16.0"
+  },
+  "devDependencies": {
+    "auto": "^10.29.3"
+  },
+  "auto": {
+    "plugins": [
+      "npm"
+    ]
   }
 }
