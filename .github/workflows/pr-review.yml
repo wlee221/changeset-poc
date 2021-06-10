@@ -16,3 +16,5 @@ jobs:
           version: 14.x
       - name: Install Dependencies
         run: yarn
+      - name: Run auto canary
+        run: yarn auto canary --dry-run
