@@ -20,6 +20,6 @@ jobs:
         run: |
           [ -f .changeset/pre.json ] && yarn changeset pre exit
       - name: Run changeset version
-        run: yarn changeset version
-      - name: Find pr-#
-        run: echo "${{ github.event.number }}"
+        run: yarn changeset version --snapshot pr-${{ github.event.number }}
+      - name: Print package version changes
+        run: cat ${{ github.workspace }}/packages/core/package.json
