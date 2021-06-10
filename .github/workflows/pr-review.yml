@@ -33,3 +33,11 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
+      - name: 'Comment on PR'
+        uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
+            const message = `📦 We publshed this PR to pr-${issue_number}!`
+            github.issues.createComment({ issue_number, owner, repo, body: message });
