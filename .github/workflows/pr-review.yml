@@ -23,8 +23,6 @@ jobs:
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
       - name: Log package version changes
         run: cat ${{ github.workspace }}/packages/core/package.json
-      - name: Publish to pr-# tag
-        run: yarn changeset publish --tag pr-${{ github.event.number }}
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -33,3 +31,5 @@ jobs:
           EOF
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to pr-# tag
+        run: yarn changeset publish --tag pr-${{ github.event.number }}
