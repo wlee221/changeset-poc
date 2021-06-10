@@ -19,3 +19,5 @@ jobs:
       - name: Exit prerelease mode if on
         run: |
           [ -f .changeset/pre.json ] && yarn changeset pre exit
+      - name: Run changeset version
+        run: yarn changeset version
