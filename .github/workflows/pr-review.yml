@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [synchronize]
 
-jobs: 
+jobs:
   Release-Snapshot:
     runs-on: ubuntu-latest
     steps:
@@ -16,3 +16,6 @@ jobs:
           version: 14.x
       - name: Install Dependencies
         run: yarn
+      - name: Exit prerelease mode if on
+        run: |
+          [ -f .changeset/pre.json ] && yarn changeset pre exit
