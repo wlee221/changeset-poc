@@ -1,3 +1,3 @@
-export const log = (message: any) => {
-    console.log(message);
+export const log = (message: any, ...rest: any[]) => {
+    console.log(message, ...rest);
 }
