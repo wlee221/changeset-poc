@@ -1,3 +1,5 @@
+import { log } from "@wlee221-changeset-poc/core";
+
 export const bar = () => {
-  console.log("bar");
+  log("bar");
 };
