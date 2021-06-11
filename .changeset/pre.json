@@ -6,5 +6,7 @@
     "@wlee221-changeset-poc/core": "0.0.1",
     "@wlee221-changeset-poc/foo": "0.0.1"
   },
-  "changesets": []
+  "changesets": [
+    "happy-onions-live"
+  ]
 }
