@@ -14,13 +14,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
+            const { issue: { number: issue_number }, repo: { owner, repo } } = context;
+            console.log(JSON.stringify(context));
             github.issues.removeLabel({
               owner,
               repo,
               issue_number,
-              'preview-release'
-            })
+              name: 'preview-release'
+            });
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -45,7 +46,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
-      - name: 'Comment on PR'
+      - name: "Comment on PR"
         uses: actions/github-script@0.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
