@@ -1,11 +1,14 @@
 name: PR Preview
 on:
-  pull_request:
-    types: [synchronize]
+  # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request_target
+  pull_request_target:
+    types: [labeled]
 
 jobs:
   Release-Snapshot:
     runs-on: ubuntu-latest
+    # https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
+    if: ${{ github.event.label.name == 'preview-release' }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -21,8 +24,6 @@ jobs:
           [ -f .changeset/pre.json ] && yarn changeset pre exit
       - name: Run changeset version
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
-      # - name: Log package version changes
-      #   run: cat ${{ github.workspace }}/packages/core/package.json
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -33,7 +34,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
-      - name: 'Comment on PR'
+      - name: "Comment on PR"
         uses: actions/github-script@0.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -41,3 +42,11 @@ jobs:
             const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
             const message = `📦 We publshed this PR to \`pr-${issue_number}\` npm tag!`;
             github.issues.createComment({ issue_number, owner, repo, body: message });
+      - name: Remove preview-release label
+        uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { issue: { number: issue_number }, repo: { owner, repo } } = context;
+            const label = 'preview-release';
+            github.issues.removeLabel({ owner, repo, issue_number, name: label });
