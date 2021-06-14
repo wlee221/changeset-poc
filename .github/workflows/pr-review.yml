@@ -1,11 +1,13 @@
 name: PR Preview
 on:
-  pull_request:
-    types: [synchronize]
+  pull_request_target: # Forks as well
+    types: [labeled]
 
 jobs:
   Release-Snapshot:
     runs-on: ubuntu-latest
+    # https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
+    if: ${{ github.event.label.name == 'preview-release' }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -21,8 +23,6 @@ jobs:
           [ -f .changeset/pre.json ] && yarn changeset pre exit
       - name: Run changeset version
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
-      # - name: Log package version changes
-      #   run: cat ${{ github.workspace }}/packages/core/package.json
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
