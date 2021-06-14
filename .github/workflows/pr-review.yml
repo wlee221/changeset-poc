@@ -22,13 +22,6 @@ jobs:
       - name: Exit prerelease mode if on
         run: |
           [ -f .changeset/pre.json ] && yarn changeset pre exit
-      - name: Add changeset if there's none
-        run: |
-          if ! (find .changeset -name "*.md" ! -name "README.md" | grep .); then
-             cp .github/changeset-samples/patch-all.md .changeset
-          fi
-          ls .changeset
-          cat .changeset/patch-all.md
       - name: Run changeset version
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
       - name: Creating .npmrc
