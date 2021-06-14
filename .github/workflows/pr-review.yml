@@ -1,6 +1,6 @@
 name: PR Preview
 on:
-  pull_request_target: # Forks as well
+  pull_request:
     types: [labeled]
 
 jobs:
