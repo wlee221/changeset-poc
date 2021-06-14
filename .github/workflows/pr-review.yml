@@ -15,7 +15,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { issue: { number: issue_number }, repo: { owner, repo } } = context;
-            console.log(JSON.stringify(context));
             github.issues.removeLabel({
               owner,
               repo,
@@ -54,3 +53,15 @@ jobs:
             const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
             const message = `📦 We publshed this PR to \`pr-${issue_number}\` npm tag!`;
             github.issues.createComment({ issue_number, owner, repo, body: message });
+      - name: Remove preview-release label
+        uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { issue: { number: issue_number }, repo: { owner, repo } } = context;
+            github.issues.removeLabel({
+              owner,
+              repo,
+              issue_number,
+              name: 'preview-release'
+            });
