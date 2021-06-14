@@ -37,6 +37,12 @@ jobs:
           EOF
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Deprecate pre-existing package, if any
+        run: |
+          for pkg in foo bar core
+          do
+            npm view @wlee221-changeset-poc/$pkg dist-tags.pr-${{ github.event.number }}
+          done
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
       - name: "Comment on PR"
