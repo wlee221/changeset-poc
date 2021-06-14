@@ -1,0 +1,25 @@
+name: Deprecate PR preview
+on:
+  # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request_target
+  pull_request:
+    types: [closed]
+
+jobs:
+  Deprecate-Preview:
+    runs-on: ubuntu-latest
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            email=wkl.hyo@gmail.com
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Deprecate pre-existing package, if any
+        # TODO: remove duplicate code from pr-review.yml
+        run: |
+          for pkg in foo bar core
+          do
+            version="$(npm view @wlee221-changeset-poc/$pkg dist-tags.pr-${{ github.event.number }})"
+            [ ! -z "$version" ] && npm deprecate "@wlee221-changeset-poc/$pkg@$version" "This preview has been deprecated."
+          done
