@@ -41,7 +41,7 @@ jobs:
         run: |
           for pkg in foo bar core
           do
-            version="$(npm view @wlee221-changeset-poc/$pkg dist-tags.pr-${{ github.event.number }})
+            version="$(npm view @wlee221-changeset-poc/$pkg dist-tags.pr-${{ github.event.number }})"
             echo $version
           done
       - name: Publish to pr-# tag
