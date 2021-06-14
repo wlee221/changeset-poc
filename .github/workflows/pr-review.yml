@@ -42,7 +42,7 @@ jobs:
           for pkg in foo bar core
           do
             version="$(npm view @wlee221-changeset-poc/$pkg dist-tags.pr-${{ github.event.number }})"
-            npm deprecate "@wlee221-changeset-poc/$pkg@$version" "This preview has been deprecated."
+            [ ! -z "$version" ] && npm deprecate "@wlee221-changeset-poc/$pkg@$version" "This preview has been deprecated."
           done
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
