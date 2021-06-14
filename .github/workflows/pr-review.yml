@@ -24,7 +24,7 @@ jobs:
           [ -f .changeset/pre.json ] && yarn changeset pre exit
       - name: Add changeset if there's none
         run: |
-          if (find .changeset -name "*.md" ! -name "README.md" | grep .); then
+          if ! (find .changeset -name "*.md" ! -name "README.md" | grep .); then
              cp .github/changeset-samples/patch-all.md .changeset
           fi
           ls .changeset
