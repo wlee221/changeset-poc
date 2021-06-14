@@ -42,7 +42,7 @@ jobs:
           for pkg in foo bar core
           do
             version="$(npm view @wlee221-changeset-poc/$pkg dist-tags.pr-${{ github.event.number }})
-            echo "version"
+            echo $version
           done
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
