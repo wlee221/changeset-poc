@@ -9,6 +9,18 @@ jobs:
     # https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
     if: ${{ github.event.label.name == 'preview-release' }}
     steps:
+      - name: Remove preview-release label
+        uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
+            github.issues.removeLabel({
+              owner,
+              repo,
+              issue_number,
+              'preview-release'
+            })
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
