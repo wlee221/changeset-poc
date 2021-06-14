@@ -27,8 +27,6 @@ jobs:
           if ! (find .changeset -name "*.md" ! -name "README.md" | grep .); then
              cp .github/changeset-samples/patch-all.md .changeset
           fi
-          ls .changeset
-          cat .changeset/patch-all.md
       - name: Run changeset version
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
       - name: Creating .npmrc
@@ -41,9 +39,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to pr-# tag
         run: yarn changeset publish --tag pr-${{ github.event.number }}
-      - name: Log
-        run: |
-          ls .changeset
       - name: "Comment on PR"
         uses: actions/github-script@0.3.0
         with:
