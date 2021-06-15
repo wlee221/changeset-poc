@@ -21,7 +21,9 @@ jobs:
         run: yarn
       - name: Exit prerelease mode if on
         run: |
-          [ -f .changeset/pre.json ] && yarn changeset pre exit
+          if [ -f .changeset/pre.json ]; then 
+            yarn changeset pre exit
+          fi
       - name: Add changeset if there's none
         run: |
           if ! (find .changeset -name "*.md" ! -name "README.md" | grep .); then
