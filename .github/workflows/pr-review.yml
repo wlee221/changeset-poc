@@ -31,6 +31,8 @@ jobs:
           fi
       - name: Run changeset version
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
