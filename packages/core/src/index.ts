@@ -1,7 +1,11 @@
+export const getDate = () => {
+    return new Date().toLocaleString();
+}
+
 export const log = (message: any, ...rest: any[]) => {
-    console.log(message, ...rest);
+    console.log(getDate(), message, ...rest);
 }
 
 export const warn = (message: any, ...rest: any[]) => {
-    console.warn(message, ...rest);
+    console.warn(getDate(), message, ...rest);
 }
