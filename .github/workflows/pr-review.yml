@@ -21,7 +21,9 @@ jobs:
         run: yarn
       - name: Exit prerelease mode if on
         run: |
-          [ -f .changeset/pre.json ] && yarn changeset pre exit
+          if [ -f .changeset/pre.json ]; then 
+            yarn changeset pre exit
+          fi
       - name: Add changeset if there's none
         run: |
           if ! (find .changeset -name "*.md" ! -name "README.md" | grep .); then
@@ -29,6 +31,8 @@ jobs:
           fi
       - name: Run changeset version
         run: yarn changeset version --snapshot pr-${{ github.event.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -59,6 +63,7 @@ jobs:
             const message = `📦 We publshed this PR to \`pr-${issue_number}\` npm tag!`;
             github.issues.createComment({ issue_number, owner, repo, body: message });
       - name: Remove preview-release label
+        if: ${{ always() }}
         uses: actions/github-script@0.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
