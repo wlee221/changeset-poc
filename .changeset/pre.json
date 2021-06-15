@@ -7,6 +7,8 @@
     "@wlee221-changeset-poc/foo": "0.0.1"
   },
   "changesets": [
-    "happy-onions-live"
+    "happy-onions-live",
+    "loud-cobras-brush",
+    "modern-pans-fry"
   ]
 }
