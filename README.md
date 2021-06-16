@@ -26,3 +26,8 @@ This will update the "Version Packages" PR, which consumes all the current chang
 
 This is done through the same `changesets` [github actions](https://github.com/changesets/action).
 
+### Developer Experience
+
+`Changeset` comes with a github bot that comments on each PR whether it has a changeset added and how to add one if not. It also gives you a link that generates a changeset automatically based on the pull request context.
+
+![Screen Shot 2021-06-15 at 5 02 19 PM](https://user-images.githubusercontent.com/43682783/122138374-76e2ea00-cdfb-11eb-8d50-edd9f36a8e56.png)
