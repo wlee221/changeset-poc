@@ -24,6 +24,6 @@ jobs:
         run: yarn build
       - name: Test packages
         run: yarn test
-      - name: Sleep for 60 seconds
-        run: sleep 60s
+      - name: Sleep for 20 seconds
+        run: sleep 20s
         shell: bash      

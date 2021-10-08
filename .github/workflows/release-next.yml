@@ -14,7 +14,6 @@ jobs:
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.head_branch == 'main'
     steps:
-      - run: echo "${{ toJson(github.event.workflow_run) }}"
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Setup Node.js LTS
