@@ -11,6 +11,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "${{ github.ref }}"
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Setup Node.js LTS
@@ -24,6 +25,6 @@ jobs:
         run: yarn build
       - name: Test packages
         run: yarn test
-      - name: Sleep for 60 seconds
-        run: sleep 60s
+      - name: Sleep for 30 seconds
+        run: sleep 30s
         shell: bash      
