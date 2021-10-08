@@ -26,4 +26,5 @@ jobs:
         run: yarn test
       - name: Sleep for 20 seconds
         run: sleep 20s
-        shell: bash      
+        shell: bash    
+      - run: exit 1  
