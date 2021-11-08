@@ -38,3 +38,5 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to next tag
         run: yarn changeset publish --tag next
+      - name: Push snapshot to GitHub
+        run: git push --tags
