@@ -38,10 +38,10 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git config user.name
+      - run: git tag test-tag -m test-tag
       - name: Publish to next tag
         run: yarn changeset publish --tag next
       - name: list tags
         run: git tag
-      - name: Push snapshot to GitHub
-        run: git push --tags
+      # - name: Push snapshot to GitHub
+      #   run: git push --tags
