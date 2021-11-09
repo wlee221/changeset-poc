@@ -29,22 +29,14 @@ jobs:
         # There needs to be a changeset for each package to publish.
         run: cp .github/changeset-samples/patch-all.md .changeset 
       - name: Run changeset version to next tag
-        run: yarn changeset version --snapshot next
+        run: yarn changeset version --snapshot next-$(git rev-parse --short=7 HEAD)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Setup GitHub user
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
       - name: Publish to next tag
         run: yarn changeset publish --tag next
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: list tags
-        run: git tag
-      - name: Push snapshot to GitHub
-        run: git push --tags
