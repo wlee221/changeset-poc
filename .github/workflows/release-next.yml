@@ -41,6 +41,8 @@ jobs:
       - run: git tag test-tag -m test-tag
       - name: Publish to next tag
         run: yarn changeset publish --tag next
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: list tags
         run: git tag
       # - name: Push snapshot to GitHub
