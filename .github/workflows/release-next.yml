@@ -48,5 +48,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: list tags
         run: git tag
-      # - name: Push snapshot to GitHub
-      #   run: git push --tags
+      - name: Push snapshot to GitHub
+        run: git push --tags
