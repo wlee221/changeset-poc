@@ -22,8 +22,13 @@ jobs:
           echo ${{ github.event.pull_request.head.repo.full_name }}
           echo ${{ github.repository }}
           echo ${{ github.event.label_name}}
-      - name: check if pr is from a fork
-        run: echo ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+      - name: check if event was a push to main
+        run: echo ${{github.event_name == 'push'}}
+      - name: check if PR is from a fork that added "run-tests" label
+        run: echo ${{github.event_name == 'pull_request_target' && github.event.label.name == 'run-tests' && github.event.pull_request.head.repo.full_name != github.repository}}
+      - name: check if PR is not from a fork
+        run: echo ${{github.event.name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository}}
+
   test:
     runs-on: ubuntu-latest
 
