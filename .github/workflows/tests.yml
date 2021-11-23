@@ -27,7 +27,7 @@ jobs:
       - name: check if PR is from a fork that added "run-tests" label
         run: echo ${{github.event_name == 'pull_request_target' && github.event.label.name == 'run-tests' && github.event.pull_request.head.repo.full_name != github.repository}}
       - name: check if PR is not from a fork
-        run: echo ${{github.event.name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository}}
+        run: echo ${{github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository}}
 
   test:
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
     if: |
       github.event_name == 'push' ||
       (github.event_name == 'pull_request_target' && github.event.label.name == 'run-tests' && github.event.pull_request.head.repo.full_name != github.repository) || 
-      (github.event.name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
