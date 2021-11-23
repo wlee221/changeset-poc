@@ -22,6 +22,8 @@ jobs:
           echo ${{ github.event.pull_request.head.repo.full_name }}
           echo ${{ github.repository }}
           echo ${{ github.event.label_name}}
+      - name: check if pr is from a fork
+        run: echo ${{ github.event.pull_request.head.repo.full_name == github.repository }}
   test:
     runs-on: ubuntu-latest
 
