@@ -4,7 +4,7 @@
   "description": "Changesets POC for monorepo environemnt",
   "scripts": {
     "release": "changeset publish",
-    "build": "echo \"not yet implemented\"",
+    "build": "exit 1",
     "test": "echo \"not yet implemented\""
   },
   "repository": {
