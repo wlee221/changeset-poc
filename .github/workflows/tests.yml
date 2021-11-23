@@ -13,17 +13,8 @@ on:
     types: [synchronize]
 
 jobs:
-  test:
+  log: 
     runs-on: ubuntu-latest
-    # We run this workflow if it's:
-    #   1) push to main, or
-    #   2) pull request not from a fork, or
-    #   3) pull request from a fork that has "run-tests" label
-
-    if: |
-      github.event_name == 'push' ||
-      (github.event_name == 'pull_request_target' && github.event.label.name == 'run-tests' && github.event.pull_request.head.repo.full_name != github.repository) || 
-      (github.event.name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: log github event name and label
         run: | 
@@ -31,6 +22,18 @@ jobs:
           echo ${{ github.event.pull_request.head.repo.full_name }}
           echo ${{ github.repository }}
           echo ${{ github.event.label_name}}
+  test:
+    runs-on: ubuntu-latest
+
+    # We run this workflow if it's:
+    #   1) push to main, or
+    #   2) pull request not from a fork, or
+    #   3) pull request from a fork that has "run-tests" label
+    if: |
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request_target' && github.event.label.name == 'run-tests' && github.event.pull_request.head.repo.full_name != github.repository) || 
+      (github.event.name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Setup Node.js LTS
