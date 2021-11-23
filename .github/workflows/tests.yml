@@ -3,13 +3,43 @@ name: Tests
 on:
   push:
     branches: [main]
-
+    
+  pull_request_target:
+    branches: [main]
+    types: [labeled]
+  
   pull_request:
     branches: [main]
+    types: [opened, synchronize]
 
 jobs:
+  log: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: log github event name and label
+        run: | 
+          echo ${{ github.event_name }}
+          echo ${{ github.event.pull_request.head.repo.full_name }}
+          echo ${{ github.repository }}
+          echo ${{ github.event.label_name}}
+      - name: check if event was a push to main
+        run: echo ${{github.event_name == 'push'}}
+      - name: check if PR is from a fork that added "run-tests" label
+        run: echo ${{github.event_name == 'pull_request_target' && github.event.label.name == 'run-tests' && github.event.pull_request.head.repo.full_name != github.repository}}
+      - name: check if PR is not from a fork
+        run: echo ${{github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository}}
+
   test:
     runs-on: ubuntu-latest
+
+    # We run this workflow if it's:
+    #   1) push to main, or
+    #   2) pull request not from a fork, or
+    #   3) pull request from a fork that has "run-tests" label
+    if: |
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request_target' && github.event.label.name == 'run-tests' && github.event.pull_request.head.repo.full_name != github.repository) || 
+      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -17,7 +47,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: lts/*
-          cache: 'yarn'
+          cache: "yarn"
       - name: Install packages
         run: yarn --frozen-lockfile
       - name: Build packages
@@ -26,4 +56,13 @@ jobs:
         run: yarn test
       - name: Sleep for 20 seconds
         run: sleep 20s
-        shell: bash      
+        shell: bash
+      - name: Remove run-tests label
+        if: always() && github.event.label.name == 'run-tests'
+        uses: actions/github-script@0.3.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { issue: { number: issue_number }, repo: { owner, repo } } = context;
+            const label = 'run-tests';
+            github.issues.removeLabel({ owner, repo, issue_number, name: label });
