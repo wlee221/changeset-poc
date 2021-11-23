@@ -20,7 +20,7 @@ jobs:
     #   3) pull request from a fork that has "run-tests" label
 
     if: |
-      github.event_name == push ||
+      github.event_name == 'push' ||
       github.event.pull_request.head.repo.full_name == github.repository ||
       github.event.label.name == 'run-tests'
     steps:
