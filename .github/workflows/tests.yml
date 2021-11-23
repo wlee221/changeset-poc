@@ -19,6 +19,7 @@ jobs:
       - name: log github event name and label
         run: | 
           echo ${{ github.event_name }}
+          echo ${{ github.event.action }}
           echo ${{ github.event.pull_request.head.repo.full_name }}
           echo ${{ github.repository }}
           echo ${{ github.event.label_name}}
