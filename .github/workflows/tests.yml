@@ -3,10 +3,13 @@ name: Tests
 on:
   push:
     branches: [main]
-
+    
   pull_request_target:
     branches: [main]
     types: [labeled]
+  
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
