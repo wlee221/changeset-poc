@@ -55,8 +55,8 @@ jobs:
         run: yarn build
       - name: Test packages
         run: yarn test
-      - name: Sleep for 20 seconds
-        run: sleep 20s
+      - name: Sleep for 15 seconds
+        run: sleep 15s
         shell: bash
       - name: Remove run-tests label
         if: always() && github.event.label.name == 'run-tests'
