@@ -13,6 +13,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - core
+          - bar
+          - foo
+
     steps:
       - name: Checkout repo 
         uses: actions/checkout@v2
@@ -28,9 +35,9 @@ jobs:
       - name: Install packages
         run: yarn --frozen-lockfile
       - name: Build packages
-        run: yarn build
+        run: yarn ${{ matrix.package }} build
       - name: Test packages
-        run: yarn test
+        run: yarn ${{ matrix.package }} test
       - name: Sleep for 20 seconds
         run: sleep 20s
         shell: bash
