@@ -1,0 +1,15 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+        with:
+          ref: ${{ github.ref }}
+          repository: ${ github.repository }}
