@@ -6,9 +6,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
-        with:
-          ref: ${{ github.ref }}
-          repository: ${ github.repository }}
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      ref: ${{ github.ref }}
+      repository: ${ github.repository }}
