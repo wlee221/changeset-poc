@@ -10,12 +10,10 @@ permissions:
   # other permissions are defaulted to "none"
 
 jobs:
-  test:
+  remove-label:
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'run-tests'
     steps:
       - name: Remove run-tests label
-        if: always()
         uses: actions/github-script@0.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -23,8 +21,8 @@ jobs:
             const { issue: { number: issue_number }, repo: { owner, repo } } = context;
             const label = 'run-tests';
             github.issues.removeLabel({ owner, repo, issue_number, name: label });
-      - name: Run tests
-        uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
-        with:
-          ref: ${{ github.ref }}
-          repository: ${ github.event.pull_request.head.repo.full_name }}
+  test:
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      ref: ${{ github.event.pull_request.head.ref }}
+      repository: ${{ github.event.pull_request.head.repo.full_name }}
