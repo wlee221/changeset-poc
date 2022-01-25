@@ -11,8 +11,14 @@ on:
         type: string
 
 jobs:
-  test:
+  setup:
     runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        run: echo "mocking setup stage..."
+  unit:
+    runs-on: ubuntu-latest
+    needs: setup
     strategy:
       matrix:
         package:
