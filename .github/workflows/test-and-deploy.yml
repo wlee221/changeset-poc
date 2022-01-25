@@ -1,0 +1,12 @@
+name: Push to main branch
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      ref: ${{ github.ref }}
+      repository: ${{ github.repository }}

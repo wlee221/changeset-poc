@@ -4,8 +4,11 @@
   "description": "Changesets POC for monorepo environemnt",
   "scripts": {
     "release": "changeset publish",
-    "build": "echo \"not yet implemented\"",
-    "test": "echo \"not yet implemented\""
+    "build": "yarn workspaces run build",
+    "test": "yarn workspaces run test",
+    "core": "yarn workspace @wlee221-changeset-poc/core",
+    "foo": "yarn workspace @wlee221-changeset-poc/foo",
+    "bar": "yarn workspace @wlee221-changeset-poc/bar"
   },
   "repository": {
     "type": "git",
