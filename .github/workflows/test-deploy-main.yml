@@ -1,0 +1,24 @@
+name: Push to main branch
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      publish-to: ${{ steps.has-changesets.should-publish }}
+    steps:
+      - id: has-changesets
+        run: |
+          find .changeset -type f -name '*.md' ! -name 'README.md' | grep -q . 
+            && echo "::set-output name=publish-to::next"
+            || echo "::set-output name=publish-to::latest"
+
+
+  test:
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      ref: ${{ github.ref }}
+      repository: ${{ github.repository }}
