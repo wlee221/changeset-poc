@@ -18,9 +18,9 @@ jobs:
         id: has-changesets
         run: |
           if (find .changeset -type f -name '*.md' ! -name 'README.md' | grep -q .) ; then
-              echo "::set-output name=publish-to::latest"
-          else
               echo "::set-output name=publish-to::next"
+          else
+              echo "::set-output name=publish-to::latest"
           fi
 
       - name: Echo `publish-to`
