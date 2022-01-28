@@ -16,9 +16,11 @@ jobs:
           persist-credentials: false
       - id: has-changesets
         run: |
-          find .changeset -type f -name '*.md' ! -name 'README.md' | grep -q . 
-            && echo "::set-output name=publish-to::next"
-            || echo "::set-output name=publish-to::latest"
+          if (find .changeset -type f -name '*.md' ! -name 'README.md' | grep -q .) ; then
+              echo "::set-output name=publish-to::latest"
+          else
+              echo "::set-output name=publish-to::next"
+          fi
 
 
   test:
