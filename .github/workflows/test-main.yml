@@ -10,6 +10,10 @@ jobs:
     outputs:
       publish-to: ${{ steps.has-changesets.should-publish }}
     steps:
+      - name: Checkout repo 
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - id: has-changesets
         run: |
           find .changeset -type f -name '*.md' ! -name 'README.md' | grep -q . 
