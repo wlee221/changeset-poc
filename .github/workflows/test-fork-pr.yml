@@ -1,4 +1,4 @@
-name: Push to Fork PR
+name: Test Fork PRs
 
 on:
   pull_request_target:
