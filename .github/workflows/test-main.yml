@@ -14,7 +14,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - id: has-changesets
+      - name: Decide whether to publish to `next` or `latest`
+        id: has-changesets
         run: |
           if (find .changeset -type f -name '*.md' ! -name 'README.md' | grep -q .) ; then
               echo "::set-output name=publish-to::latest"
@@ -22,6 +23,8 @@ jobs:
               echo "::set-output name=publish-to::next"
           fi
 
+      - name: Echo `publish-to`
+        run: echo ${{ steps.has-changesets.outputs.publish-to }}
 
   test:
     uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
