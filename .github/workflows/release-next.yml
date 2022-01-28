@@ -2,7 +2,7 @@ name: Publish to @next
 
 on:
   workflow_run:
-    workflows: ['Test Main Branch']
+    workflows: ['Test/main']
     types:
       - completed
 
