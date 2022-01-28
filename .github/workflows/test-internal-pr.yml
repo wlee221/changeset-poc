@@ -1,4 +1,4 @@
-name: Test/internal-prs
+name: Test / internal-prs
 
 on:
   pull_request:
