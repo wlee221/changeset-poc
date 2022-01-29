@@ -41,6 +41,8 @@ jobs:
           cache: "yarn"
       - name: Check if CI environment is accessible
         run: echo ${{ secrets.USERNAME }}
+      - name: Check if repo secret is accessible
+        run: echo ${{ secrets.NOT_SECRET }}
       - name: Install packages
         run: yarn --frozen-lockfile
       - name: Build packages
