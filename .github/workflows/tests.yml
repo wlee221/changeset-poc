@@ -19,6 +19,7 @@ jobs:
   unit:
     runs-on: ubuntu-latest
     needs: setup
+    environment: CI
     strategy:
       matrix:
         package:
@@ -38,6 +39,8 @@ jobs:
         with:
           node-version: lts/*
           cache: "yarn"
+      - name: Check if CI environment is accessible
+        run: echo ${{ secrets.USERNAME }}
       - name: Install packages
         run: yarn --frozen-lockfile
       - name: Build packages
