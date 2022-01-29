@@ -9,6 +9,9 @@ on:
       repository:
         required: true
         type: string
+    secrets:
+      USERNAME:
+        required: true
 
 jobs:
   setup:

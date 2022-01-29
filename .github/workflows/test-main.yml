@@ -32,3 +32,5 @@ jobs:
     with:
       ref: ${{ github.ref }}
       repository: ${{ github.repository }}
+    secrets:
+      USERNAME: ${{ secrets.USERNAME }}
