@@ -2,7 +2,7 @@ name: Publish to @next
 
 on:
   workflow_run:
-    workflows: ['Test / main']
+    workflows: ["Test / main"]
     types:
       - completed
 
@@ -16,20 +16,20 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-        with: 
+        with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Setup Node.js LTS
         uses: actions/setup-node@v2
         with:
           node-version: lts/*
-          cache: 'yarn'
+          cache: "yarn"
       - name: Install packages
         run: yarn --frozen-lockfile
       - name: Build packages
         run: yarn build
       - name: Add changeset that bumps all public packages
         # There needs to be a changeset for each package to publish.
-        run: cp .github/changeset-samples/patch-all.md .changeset 
+        run: cp .github/changeset-samples/patch-all.md .changeset
       - name: Run changeset version to next tag
         run: yarn changeset version --snapshot next-$(git rev-parse --short=7 HEAD)
         env:
@@ -42,3 +42,11 @@ jobs:
         run: yarn changeset publish --tag next
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Echo published
+        run: echo ${{ steps.publish-next.outputs.published }}
+      - name: Merge main into docs-release branch
+        if: steps.publish-next.outputs.published == 'true'
+        run: |
+          git checkout docs-release
+          git merge main
+          git push
