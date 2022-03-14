@@ -44,3 +44,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Echo published
         run: echo ${{ steps.publish-next.outputs.published }}
+      - name: Merge main into docs-release branch
+        if: steps.publish-next.outputs.published == 'true'
+        run: |
+          git checkout docs-release
+          git merge main
+          git push
