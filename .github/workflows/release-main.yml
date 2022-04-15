@@ -6,7 +6,6 @@ on:
       - main
       
 permissions:
-  pull-requests: write
   contents: write
   
   # Other permissions are set to write
