@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+      
+permissions:
+  pull-requests: write
+  # Other permissions are set to write
 
 jobs:
   release:
