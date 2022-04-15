@@ -7,7 +7,7 @@ on:
       
 permissions:
   contents: write
-  
+  pull-requests: write
   # Other permissions are set to write
 
 jobs:
