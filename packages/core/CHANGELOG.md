@@ -1,5 +1,13 @@
 # @wlee221-changeset-poc/core
 
+## 0.1.1
+
+### Patch Changes
+
+- [`309ce94`](https://github.com/wlee221/changeset-poc/commit/309ce945322a9787f745391d9f3f889e76287b60) Thanks [@wlee221](https://github.com/wlee221)! - This changeset will bump all packages in this repo. This will be useful for making a preview release for a pull request that doesn't have a changeset.
+
+  CI can add this file to `.changeset` so that `changeset` will make preview releases for all packages.
+
 ## 0.1.0
 
 ### Minor Changes
