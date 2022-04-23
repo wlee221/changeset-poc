@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   release:
+    if: ${{ '1' == '2' }}
     name: Release
     runs-on: ubuntu-latest
     steps:
