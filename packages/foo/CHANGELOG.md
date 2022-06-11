@@ -1,5 +1,14 @@
 # @wlee221-changeset-poc/foo
 
+## 3.0.1
+
+### Patch Changes
+
+- [`309ce94`](https://github.com/wlee221/changeset-poc/commit/309ce945322a9787f745391d9f3f889e76287b60) Thanks [@wlee221](https://github.com/wlee221)! - This is a dummy patch bump.
+
+- Updated dependencies [[`309ce94`](https://github.com/wlee221/changeset-poc/commit/309ce945322a9787f745391d9f3f889e76287b60)]:
+  - @wlee221-changeset-poc/core@3.0.1
+
 ## 3.0.0
 
 ### Major Changes
