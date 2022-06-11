@@ -2,7 +2,7 @@ name: Test / forks
 
 on:
   pull_request_target:
-    branches: [main]
+    branches: [v2]
     types: [labeled]
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
             const label = 'run-tests';
             github.issues.removeLabel({ owner, repo, issue_number, name: label });
   test:
-    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@v2
     with:
       ref: ${{ github.event.pull_request.head.ref }}
       repository: ${{ github.event.pull_request.head.repo.full_name }}
