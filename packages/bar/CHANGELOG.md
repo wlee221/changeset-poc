@@ -1,5 +1,27 @@
 # @wlee221-changeset-poc/bar
 
+## 2.0.0
+
+### Major Changes
+
+- 309ce94: Bump packages to 2.x
+
+### Patch Changes
+
+- Updated dependencies [309ce94]
+  - @wlee221-changeset-poc/core@2.0.0
+
+## 1.0.0
+
+### Major Changes
+
+- 309ce94: Bump packages to 1.x
+
+### Patch Changes
+
+- Updated dependencies [309ce94]
+  - @wlee221-changeset-poc/core@1.0.0
+
 ## 0.0.3
 
 ### Patch Changes
