@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Changesets POC for monorepo environemnt",
   "scripts": {
-    "release": "changeset publish",
+    "release:v2": "changeset publish --tag v2",
     "build": "yarn workspaces run build",
     "test": "yarn workspaces run test",
     "core": "yarn workspace @wlee221-changeset-poc/core",
