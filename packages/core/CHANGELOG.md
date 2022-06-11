@@ -1,11 +1,5 @@
 # @wlee221-changeset-poc/core
 
-## 3.0.0
-
-### Major Changes
-
-- 309ce94: Bump packages to 3.x
-
 ## 2.0.0
 
 ### Major Changes
