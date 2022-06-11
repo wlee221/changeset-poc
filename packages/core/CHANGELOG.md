@@ -1,5 +1,11 @@
 # @wlee221-changeset-poc/core
 
+## 2.0.1
+
+### Patch Changes
+
+- [`309ce94`](https://github.com/wlee221/changeset-poc/commit/309ce945322a9787f745391d9f3f889e76287b60) Thanks [@wlee221](https://github.com/wlee221)! - This is a dummy patch bump.
+
 ## 2.0.0
 
 ### Major Changes
