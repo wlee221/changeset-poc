@@ -15,6 +15,7 @@ jobs:
         with:
           persist-credentials: false
       - run: node --version
+      - run: npm --version
       - name: Decide whether to publish to `next` or `latest`
         id: has-changesets
         run: |
