@@ -1,4 +1,4 @@
-name: Publish to @next
+name: Publish / manual
 
 on:
   workflow_dispatch:
