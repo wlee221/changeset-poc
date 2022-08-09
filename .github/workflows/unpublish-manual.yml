@@ -1,0 +1,51 @@
+name: Unpublish / manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      dist-tag:
+        type: choice
+        description: npm dist tag to publish to
+        options:
+          - experimental
+          - poc
+        required: true
+
+jobs:
+  unpublish:
+    strategy:
+      matrix:
+        package:
+          - core
+          - bar
+          - foo
+    runs-on: ubuntu-latest
+    environment: ci
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Get version that dist-tag points to
+        id: get-version
+        run: |
+          version="$(npm view @wlee221-changeset-poc/"$PACKAGE" dist-tags."$DIST_TAG")"
+          echo "::set-output name=version::"$version""
+        env:
+          PACKAGE: ${{ matrix.package }}
+          DIST_TAG: ${{ inputs.dist-tag }}
+      - name: echo version
+        run: echo ${{ steps.get-version.outputs.version }}
+
+      # - name: Create .npmrc
+      #   run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+      #   env:
+      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Publish to next tag
+      #   id: publish-next
+      #   run: yarn changeset publish --tag "$TAG_NAME"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     TAG_NAME: ${{ inputs.dist-tag }}
+      # - name: Echo published
+      #   run: echo ${{ steps.publish-next.outputs.published }}
