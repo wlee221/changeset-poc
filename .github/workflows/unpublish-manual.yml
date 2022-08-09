@@ -42,7 +42,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Unpublish version
         if: ${{ steps.get-version.outputs.version != '' }}
-        run: npm unpublish @wlee221-changeset-poc/"$PACKAGE"@"$VERSION" --dry-run
+        run: npm unpublish @wlee221-changeset-poc/"$PACKAGE"@"$VERSION"
         env:
           VERSION: ${{ steps.get-version.outputs.version }}
           PACKAGE: ${{ matrix.package }}
