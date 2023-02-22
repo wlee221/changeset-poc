@@ -4,6 +4,11 @@ on:
   pull_request_target:
     branches: [main]
     types: [labeled]
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: 'Commit to run tests against'
+        required: true
 
 permissions:
   pull-requests: write # used to remove label
