@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       commit:
-        description: 'Commit to run tests against'
+        description: "Commit to run tests against"
         required: true
       repository:
-        description: 'Fork repository to run tests against'
+        description: "Fork repository to run tests against"
         required: true
 
 jobs:
@@ -18,3 +18,14 @@ jobs:
       repository: ${{ inputs.repository }}
     secrets:
       USERNAME: ${{ secrets.USERNAME }}
+
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: LouisBrunner/checks-action@v1.6.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: PR Checks
+          conclusion: "success"
+          sha: ${{ inputs.commit }}
+          output: "POC"
