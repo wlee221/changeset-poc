@@ -4,11 +4,17 @@ on:
   push:
     branches:
       - main
+      
+permissions:
+  contents: write
+  pull-requests: write
+  # Other permissions are set to write
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    environment: deployment
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master

@@ -1,0 +1,38 @@
+name: Test / main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      publish-to: ${{ steps.has-changesets.should-publish }}
+    steps:
+      - name: Checkout repo 
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - run: node --version
+      - run: npm --version
+      - name: Decide whether to publish to `next` or `latest`
+        id: has-changesets
+        run: |
+          if (find .changeset -type f -name '*.md' ! -name 'README.md' | grep -q .) ; then
+              echo "::set-output name=publish-to::next"
+          else
+              echo "::set-output name=publish-to::latest"
+          fi
+      - name: Check if repo secret is accessible
+        run: echo ${{ secrets.NOT_SECRET }}
+      - name: Echo `publish-to`
+        run: echo ${{ steps.has-changesets.outputs.publish-to }}
+
+  test:
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      ref: ${{ github.ref }}
+      repository: ${{ github.repository }}
+    secrets:
+      USERNAME: ${{ secrets.USERNAME }}

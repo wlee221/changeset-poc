@@ -1,18 +1,20 @@
-name: Publish to @next
+name: Publish / manual
 
 on:
-  workflow_run:
-    workflows: ["Test / main"]
-    types:
-      - completed
+  workflow_dispatch:
+    inputs:
+      dist-tag:
+        type: choice
+        description: npm dist tag to publish to
+        options:
+          - experimental
+          - poc
+        required: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     environment: deployment
-    if: |
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.head_branch == 'main'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -31,23 +33,19 @@ jobs:
         # There needs to be a changeset for each package to publish.
         run: cp .github/changeset-samples/patch-all.md .changeset
       - name: Run changeset version to next tag
-        run: yarn changeset version --snapshot next-$(git rev-parse --short=7 HEAD)
+        run: yarn changeset version --snapshot "$TAG_NAME"-$(git rev-parse --short=7 HEAD)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ inputs.dist-tag }}
       - name: Create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to next tag
         id: publish-next
-        run: yarn changeset publish --tag next
+        run: yarn changeset publish --tag "$TAG_NAME"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ inputs.dist-tag }}
       - name: Echo published
         run: echo ${{ steps.publish-next.outputs.published }}
-      - name: Merge main into docs-release branch
-        if: steps.publish-next.outputs.published == 'true'
-        run: |
-          git checkout docs-release
-          git merge main
-          git push

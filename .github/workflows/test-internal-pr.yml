@@ -1,4 +1,4 @@
-name: Test Internal PRs
+name: Test / internal-prs
 
 on:
   pull_request:
@@ -12,3 +12,5 @@ jobs:
     with:
       ref: ${{ github.event.pull_request.head.ref }}
       repository: ${{ github.event.pull_request.head.repo.full_name }}
+    secrets:
+      USERNAME: ${{ secrets.USERNAME }}

@@ -1,0 +1,20 @@
+name: Test / forks
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: 'Commit to run tests against'
+        required: true
+      repository:
+        description: 'Fork repository to run tests against'
+        required: true
+
+jobs:
+  test:
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      ref: ${{ inputs.commit }}
+      repository: ${{ inputs.repository }}
+    secrets:
+      USERNAME: ${{ secrets.USERNAME }}
