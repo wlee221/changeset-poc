@@ -28,4 +28,3 @@ jobs:
           name: PR Checks
           conclusion: "success"
           sha: ${{ inputs.commit }}
-          output: "POC"
