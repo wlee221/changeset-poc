@@ -21,6 +21,11 @@ jobs:
             const { issue: { number: issue_number }, repo: { owner, repo } } = context;
             const label = 'run-tests';
             github.issues.removeLabel({ owner, repo, issue_number, name: label });
+      - name: Sleep for 20 seconds
+        run: sleep 20s
+        shell: bash
+      - name: echo ref
+        run: echo ${{ github.event.pull_request.head.ref }}
   test:
     uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
     with:

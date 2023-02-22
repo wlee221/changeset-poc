@@ -31,6 +31,8 @@ jobs:
           - foo
 
     steps:
+      - name: echo ref
+        run: echo ${{ inputs.ref }}
       - name: Checkout repo 
         uses: actions/checkout@v2
         with:
