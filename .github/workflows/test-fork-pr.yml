@@ -21,8 +21,8 @@ jobs:
             const { issue: { number: issue_number }, repo: { owner, repo } } = context;
             const label = 'run-tests';
             github.issues.removeLabel({ owner, repo, issue_number, name: label });
-      - name: Sleep for 20 seconds
-        run: sleep 20s
+      - name: Sleep for 120 seconds
+        run: sleep 120s
         shell: bash
       - name: echo ref
         run: echo ${{ github.event.pull_request.head.ref }}
