@@ -1,9 +1,6 @@
 name: Test / forks
 
 on:
-  pull_request_target:
-    branches: [main]
-    types: [labeled]
   workflow_dispatch:
     inputs:
       commit:
