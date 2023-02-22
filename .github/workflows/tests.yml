@@ -36,6 +36,7 @@ jobs:
           ref: ${{ inputs.ref }}
           # repository: ${{ inputs.repository }}
           persist-credentials: false
+      -  run: git log
       - name: Setup Node.js LTS
         uses: actions/setup-node@v2
         with:
