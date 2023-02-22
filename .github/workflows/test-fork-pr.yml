@@ -27,4 +27,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: PR Checks
           conclusion: "success"
-          sha: ${{ inputs.commit }}
+          sha: ${{ inputs.commit }}        
+          output: |
+            {"summary":"This is a POC"}
