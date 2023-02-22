@@ -6,7 +6,7 @@ on:
       commit:
         description: 'Commit to run tests against'
         required: true
-      fork-repository:
+      repository:
         description: 'Fork repository to run tests against'
         required: true
 
