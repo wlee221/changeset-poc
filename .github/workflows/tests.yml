@@ -34,7 +34,7 @@ jobs:
       - name: echo ref
         run: echo ${{ inputs.ref }}
       - name: Checkout repo 
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ inputs.ref }}
           repository: ${{ inputs.repository }}
