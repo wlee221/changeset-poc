@@ -4,11 +4,10 @@ on:
   workflow_call:
     inputs:
       ref:
-        required: true  
+        required: true
         type: string
-    repo:
-      ref:
-        required: true  
+      repo:
+        required: true
         type: string
     secrets:
       USERNAME:
@@ -34,13 +33,13 @@ jobs:
     steps:
       - name: echo ref
         run: echo ${{ inputs.ref }}
-      - name: Checkout repo 
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
           ref: ${{ inputs.ref }}
           repository: ${{ inputs.repo }}
           persist-credentials: false
-      -  run: git log
+      - run: git log
       - name: Setup Node.js LTS
         uses: actions/setup-node@v2
         with:
