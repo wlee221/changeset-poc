@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.event.review.commit_id }}
-      - run: echo ${{ github.action_repository }}
-      - run: echo ${{ github.event.pull_request.head.repo }}
+      - run: echo ${{ github.repository }}
+      - run: echo ${{ github.event.pull_request.head.repo.full_name }}
 
   test:
     needs: echo
