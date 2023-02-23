@@ -45,6 +45,7 @@ jobs:
             30,
           ]
     steps:
+      - run: echo ${{ matrix.name }}
       - name: Sleep
         run: sleep 600s
         shell: bash
