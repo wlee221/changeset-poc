@@ -1,4 +1,4 @@
-name: Experiment
+name: Run 256 Tasks
 on:
   # schedule:
   #   - cron: "*/5 * * * *"
