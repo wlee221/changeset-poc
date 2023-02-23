@@ -1,0 +1,22 @@
+name: Experiment
+on:
+  # schedule:
+  #   - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ci
+    strategy:
+      fail-fast: false
+      matrix:
+        x: [1, 2, 3, 4]
+        y: [1, 2, 3, 4]
+        z: [1, 2, 3, 4]
+        w: [1, 2, 3, 4]
+    steps:
+      - name: Sleep
+        run: sleep 150s
+        shell: bash
+      - run: exit 1
