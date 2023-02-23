@@ -1,7 +1,8 @@
 name: Experiment
-on: 
+on:
   schedule:
-  - cron: '*/5 * * * *'
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
 
 jobs:
   job1:
@@ -9,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Git checkout
-      uses: actions/checkout@v2
-      with: { ref: debug }
-    - name: List files
-      run: ls
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with: { ref: debug }
+      - name: List files
+        run: ls
