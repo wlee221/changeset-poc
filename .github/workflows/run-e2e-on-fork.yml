@@ -7,6 +7,9 @@ jobs:
   get-info:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.event.workflow_run.event.review.commit_id }}
-      - run: echo ${{ toJSON(github.event.workflow_run) }}
-      - run: echo ${{ toJSON(github.event) }}
+      - name: echo
+        run: echo ${{ github.event.workflow_run.event.review.commit_id }}
+      - name: echo
+        run: echo ${{ toJSON(github.event.workflow_run) }}
+      - name: echo 
+        run: echo ${{ toJSON(github.event) }}
