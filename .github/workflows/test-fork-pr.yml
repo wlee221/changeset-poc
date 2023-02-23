@@ -14,7 +14,7 @@ jobs:
     needs: echo
     uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
     with:
-      repo: ${{ github.event.pull_request.head.repo }}
+      repo: ${{ github.event.pull_request.head.repo.full_name }}
       ref: ${{ github.event.review.commit_id }}
     secrets:
       USERNAME: ${{ secrets.USERNAME }}
