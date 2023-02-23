@@ -34,20 +34,20 @@ jobs:
         run: yarn changeset version --snapshot next-$(git rev-parse --short=7 HEAD)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Publish to next tag
-        id: publish-next
-        run: yarn changeset publish --tag next
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Echo published
-        run: echo ${{ steps.publish-next.outputs.published }}
-      - name: Merge main into docs-release branch
-        if: steps.publish-next.outputs.published == 'true'
-        run: |
-          git checkout docs-release
-          git merge main
-          git push
+      # - name: Create .npmrc
+      #   run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+      #   env:
+      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Publish to next tag
+      #   id: publish-next
+      #   run: yarn changeset publish --tag next
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Echo published
+      #   run: echo ${{ steps.publish-next.outputs.published }}
+      # - name: Merge main into docs-release branch
+      #   if: steps.publish-next.outputs.published == 'true'
+      #   run: |
+      #     git checkout docs-release
+      #     git merge main
+      #     git push
