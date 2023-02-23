@@ -55,5 +55,5 @@ jobs:
         run: yarn ${{ matrix.package }} build
       - name: Test packages
         run: yarn ${{ matrix.package }} test
-      - run: sleep 21s
+      - run: sleep 22s
         shell: bash
