@@ -1,0 +1,13 @@
+on:
+  workflow_run:
+    types: [completed]
+    workflows: [Receive Fork Approval]
+
+jobs:
+  get-info:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.event.workflow_run.event.review.commit_id }}
+      - run: echo ${{ github.event.workflow_run }}
+      - run: echo ${{ github.event.workflow_run.event }}
+      - run: echo ${{ github.event.workflow_run.event.review }}
