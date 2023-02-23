@@ -1,28 +1,18 @@
 name: Test / forks
 
-on:
-  workflow_dispatch:
-    inputs:
-      commit:
-        description: "Commit to run tests against"
-        required: true
+on: pull_request_review
 
 jobs:
-  test:
-    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
-    with:
-      ref: ${{ inputs.commit }}
-    secrets:
-      USERNAME: ${{ secrets.USERNAME }}
-
-  status:
+  echo:
     runs-on: ubuntu-latest
     steps:
-      - uses: LouisBrunner/checks-action@v1.6.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: PR Checks
-          conclusion: "success"
-          sha: ${{ inputs.commit }}        
-          output: |
-            {"summary":"This is a POC"}
+      - run: echo ${{ github.event.review.commit_id }}
+
+  test:
+    needs: echo
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      repo: ${{ github.event.pull_request.head.sha }}
+      ref: ${{ github.event.review.commit_id }}
+    secrets:
+      USERNAME: ${{ secrets.USERNAME }}
