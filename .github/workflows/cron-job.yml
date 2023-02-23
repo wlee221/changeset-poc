@@ -1,4 +1,4 @@
-name: Build and Runtime Test
+name: Run cron jobs
 
 on:
   schedule:
