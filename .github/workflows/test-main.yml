@@ -33,6 +33,6 @@ jobs:
     uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
     with:
       ref: ${{ github.ref }}
-      repository: ${{ github.repository }}
+      repo: ${{ github.repository }}
     secrets:
       USERNAME: ${{ secrets.USERNAME }}
