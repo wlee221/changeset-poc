@@ -29,7 +29,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}	
           name: PR Checks	
           conclusion: "success"	
-          sha: ${{ inputs.commit }}        	
+          sha: ${{ github.event.workflow_run.head_commit.id }}    	
           output: |	
             {"summary":"This is a POC"}	
 
