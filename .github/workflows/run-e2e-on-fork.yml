@@ -4,12 +4,19 @@ on:
     workflows: [Receive Fork Approval]
 
 jobs:
-  get-info:
-    runs-on: ubuntu-latest
-    steps:
-      - name: echo
-        run: echo ${{ github.event.workflow_run.event.review.commit_id }}
-      - name: echo 
-        run: echo ${{ toJSON(github.event) }}
-      - name: echo
-        run: echo ${{ toJSON(github.event.workflow_run) }}
+  # get-info:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: echo
+  #       run: echo ${{ github.event.workflow_run.event.review.commit_id }}
+  #     - name: echo
+  #       run: echo ${{ toJSON(github.event) }}
+  #     - name: echo
+  #       run: echo ${{ toJSON(github.event.workflow_run) }}
+  run-tests:
+    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+    with:
+      repo: ${{ github.event.workflow_run.head_commit.id }}
+      ref: ${{ github.event.workflow_run.head_repository.full_name }}
+    secrets:
+      USERNAME: ${{ secrets.USERNAME }}
