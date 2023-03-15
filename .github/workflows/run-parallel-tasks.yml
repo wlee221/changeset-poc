@@ -1,4 +1,4 @@
-name: Experiment
+name: Run 256 Tasks
 on:
   # schedule:
   #   - cron: "*/5 * * * *"
@@ -11,8 +11,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [1, 2, 3, 4, 5]
-        value: [1, 2, 3, 4, 5]
+        x: [1, 2, 3, 4]
+        y: [1, 2, 3, 4]
+        z: [1, 2, 3, 4]
+        w: [1, 2, 3, 4]
     steps:
       - name: Sleep
         run: sleep 150s

@@ -4,32 +4,32 @@ on:
     workflows: [Receive Fork Approval]
 
 jobs:
-  # get-info:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: echo
-  #       run: echo ${{ github.event.workflow_run.event.review.commit_id }}
-  #     - name: echo
-  #       run: echo ${{ toJSON(github.event) }}
-  #     - name: echo
-  #       run: echo ${{ toJSON(github.event.workflow_run) }}
-  tests:
-    uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
-    with:
-      repo: ${{ github.event.workflow_run.head_repository.full_name }}
-      ref: ${{ github.event.workflow_run.head_commit.id }}
-    secrets:
-      USERNAME: ${{ secrets.USERNAME }}
-  status:	
-    needs: tests
-    runs-on: ubuntu-latest	
-    steps:	
-      - uses: LouisBrunner/checks-action@v1.6.0	
-        with:	
-          token: ${{ secrets.GITHUB_TOKEN }}	
-          name: PR Checks	
-          conclusion: "success"	
-          sha: ${{ github.event.workflow_run.head_commit.id }}    	
-          output: |	
-            {"summary":"This is a POC"}	
+  get-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        run: echo ${{ github.event.workflow_run.event.review.commit_id }}
+      - name: echo
+        run: echo ${{ toJSON(github.event) }}
+      - name: echo
+        run: echo ${{ toJSON(github.event.workflow_run) }}
+  # tests:
+  #   uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
+  #   with:
+  #     repo: ${{ github.event.workflow_run.head_repository.full_name }}
+  #     ref: ${{ github.event.workflow_run.head_commit.id }}
+  #   secrets:
+  #     USERNAME: ${{ secrets.USERNAME }}
+  # status:	
+  #   needs: tests
+  #   runs-on: ubuntu-latest	
+  #   steps:	
+  #     - uses: LouisBrunner/checks-action@v1.6.0	
+  #       with:	
+  #         token: ${{ secrets.GITHUB_TOKEN }}	
+  #         name: PR Checks	
+  #         conclusion: "success"	
+  #         sha: ${{ github.event.workflow_run.head_commit.id }}    	
+  #         output: |	
+  #           {"summary":"This is a POC"}	
 
