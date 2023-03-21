@@ -1,7 +1,7 @@
 # changeset-poc
 
 This is a POC for using [changesets](https://github.com/atlassian/changesets) to implement continuous deployment.
-
+hi!
 ### Workflow
 
 1. On PR, customer generates changesets using `changesets` CLI. Here's an example: [link](https://github.com/wlee221/changeset-poc/blob/11ae4b446f5e860a128d9670669b594daa576e5c/.changeset/breezy-clouds-pump.md).
