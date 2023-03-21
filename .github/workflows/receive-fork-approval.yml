@@ -6,8 +6,8 @@ jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1;
-
+      - run: exit 0;
+  #
   # test:
   #   needs: echo
   #   uses: wlee221/changeset-poc/.github/workflows/tests.yml@main
